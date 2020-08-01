@@ -5,6 +5,7 @@ namespace InsurancePolicy.Application.Services
     using Application.Interfaces;
     using Application.ViewModels;
     using Domain.Interfaces;
+
     public class InsurancePolicyService : IInsurancePolicy
     {
         public IInsurancePolicyRepository _InsurancePolicyRepository;
