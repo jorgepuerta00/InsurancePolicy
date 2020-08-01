@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace InsurancePolicy.Application.Services
+﻿namespace InsurancePolicy.Application.Services
 {
     using Application.Interfaces;
     using Application.ViewModels;
@@ -8,14 +6,17 @@ namespace InsurancePolicy.Application.Services
 
     public class RiskTypeService : IRiskType
     {
-        public IRiskTypeRepository _RiskTypeRepository;
-        public RiskTypeService(IRiskTypeRepository RiskTypeRepository)
+        public IRiskTypeRepository _riskTypeRepository;
+        public RiskTypeService(IRiskTypeRepository riskTypeRepository)
         {
-            _RiskTypeRepository = RiskTypeRepository;
+            _riskTypeRepository = riskTypeRepository;
         }
         RiskTypeViewModel IRiskType.GetRiskTypes()
         {
-            throw new NotImplementedException();
+            return new RiskTypeViewModel()
+            {
+                RiskTypes = _riskTypeRepository.GetRiskTypes()
+            };
         }
     }
 }

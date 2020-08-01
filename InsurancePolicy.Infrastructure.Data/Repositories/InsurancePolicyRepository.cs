@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-
-namespace InsurancePolicy.Infrastructure.Data.Repositories
+﻿namespace InsurancePolicy.Infrastructure.Data.Repositories
 {
     using Domain.Interfaces;
     using Domain.Models;
     using Data.Context;
+    using System.Collections.Generic;
 
     public class InsurancePolicyRepository : IInsurancePolicyRepository
     {
@@ -15,7 +14,8 @@ namespace InsurancePolicy.Infrastructure.Data.Repositories
         }
         public IEnumerable<InsurancePolicy> GetInsurancePolicies()
         {
-            throw new System.NotImplementedException();
+            return _context.InsurancePolicies;
+
         }
     }
 }

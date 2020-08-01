@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace InsurancePolicy.Application.Services
+﻿namespace InsurancePolicy.Application.Services
 {
     using Application.Interfaces;
     using Application.ViewModels;
@@ -15,7 +13,10 @@ namespace InsurancePolicy.Application.Services
         }
         CoverageTypeViewModel ICoverageType.GetCoverageTypes()
         {
-            throw new NotImplementedException();
+            return new CoverageTypeViewModel()
+            {
+                CoverageTypes = _coverageTypeRepository.GetCoverageTypes()
+            };
         }
     }
 }

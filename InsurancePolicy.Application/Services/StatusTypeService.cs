@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace InsurancePolicy.Application.Services
+﻿namespace InsurancePolicy.Application.Services
 {
     using Application.Interfaces;
     using Application.ViewModels;
@@ -8,14 +6,17 @@ namespace InsurancePolicy.Application.Services
 
     public class StatusTypeService : IStatusType
     {
-        public IStatusTypeRepository _StatusTypeRepository;
-        public StatusTypeService(IStatusTypeRepository StatusTypeRepository)
+        public IStatusTypeRepository _statusTypeRepository;
+        public StatusTypeService(IStatusTypeRepository statusTypeRepository)
         {
-            _StatusTypeRepository = StatusTypeRepository;
+            _statusTypeRepository = statusTypeRepository;
         }
         StatusTypeViewModel IStatusType.GetStatusTypes()
         {
-            throw new NotImplementedException();
+            return new StatusTypeViewModel()
+            {
+                StatusTypes = _statusTypeRepository.GetStatusTypes()
+            };
         }
     }
 

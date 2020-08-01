@@ -4,6 +4,6 @@
     using System.Collections.Generic;
     public class RiskTypeViewModel
     {
-        public IEnumerable<RiskType> Books { get; set; }
+        public IEnumerable<RiskType> RiskTypes { get; set; }
     }
 }

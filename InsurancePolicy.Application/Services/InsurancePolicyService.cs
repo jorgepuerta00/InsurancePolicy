@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace InsurancePolicy.Application.Services
+﻿namespace InsurancePolicy.Application.Services
 {
     using Application.Interfaces;
     using Application.ViewModels;
@@ -8,14 +6,17 @@ namespace InsurancePolicy.Application.Services
 
     public class InsurancePolicyService : IInsurancePolicy
     {
-        public IInsurancePolicyRepository _InsurancePolicyRepository;
-        public InsurancePolicyService(IInsurancePolicyRepository InsurancePolicyRepository)
+        public IInsurancePolicyRepository _insurancePolicyRepository;
+        public InsurancePolicyService(IInsurancePolicyRepository insurancePolicyRepository)
         {
-            _InsurancePolicyRepository = InsurancePolicyRepository;
+            _insurancePolicyRepository = insurancePolicyRepository;
         }
         InsurancePolicyViewModel IInsurancePolicy.GetInsurancePolicies()
         {
-            throw new NotImplementedException();
+            return new InsurancePolicyViewModel()
+            {
+                InsurancePolicies = _insurancePolicyRepository.GetInsurancePolicies()
+            };
         }
     }
 }
