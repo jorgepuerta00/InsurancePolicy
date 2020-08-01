@@ -10,16 +10,16 @@
     {
         public static void RegisterServices(IServiceCollection services)
         {
-            services.AddScoped<ICoverageType, CoverageTypeService>();
+            services.AddScoped<ICoverageTypeService, CoverageTypeService>();
             services.AddScoped<ICoverageTypeRepository, CoverageTypeRepository>();
 
-            services.AddScoped<IInsurancePolicy, InsurancePolicyService>();
+            services.AddScoped<IInsurancePolicyService, InsurancePolicyService>();
             services.AddScoped<IInsurancePolicyRepository, InsurancePolicyRepository>();
 
-            services.AddScoped<IRiskType, RiskTypeService>();
+            services.AddScoped<IRiskTypeService, RiskTypeService>();
             services.AddScoped<IRiskTypeRepository, RiskTypeRepository>();
 
-            services.AddScoped<IStatusType, StatusTypeService>();
+            services.AddScoped<IStatusTypeService, StatusTypeService>();
             services.AddScoped<IStatusTypeRepository, StatusTypeRepository>();
         }
     }

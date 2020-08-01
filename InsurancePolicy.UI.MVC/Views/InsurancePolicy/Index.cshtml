@@ -1,0 +1,31 @@
+﻿@model InsurancePolicy.Application.ViewModels.InsurancePolicyViewModel
+
+<table id="book" class="table table-bordered table-hover">
+    <thead>
+        <tr class="">
+            <th>Nombre</th>
+            <th>Descriptión</th>
+            <th>Tipo Cobertura</th>
+            <th>Cobertura %</th>
+            <th>Fecha Inicio Vigencia</th>
+            <th>Periodo de Cobertura (meses)</th>
+            <th>Precio</th>
+            <th>Tipo de Riesgo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model.InsurancePolicies)
+        {
+        <tr style="height: 60px;">
+            <td>@obj.Name</td>
+            <td>@obj.Description</td>
+            <td>@obj.CoverageTypeID</td>
+            <td>@obj.CoveragePercentage</td>
+            <td>@obj.CoverageTimeElapsed</td>
+            <td>@obj.Startdate</td>
+            <td>@obj.TotalCost</td>
+            <td>@obj.RiskTypeID</td>
+        </tr>
+        }
+    </tbody>
+</table>

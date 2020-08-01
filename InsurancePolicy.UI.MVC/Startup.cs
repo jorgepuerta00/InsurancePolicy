@@ -1,5 +1,6 @@
 namespace InsurancePolicy.UI.MVC
 {
+    using Infrastructure.IoC;
     using Infrastructure.Data.Context;
     using InsurancePolicy.UI.MVC.Data;
     using Microsoft.AspNetCore.Builder;
@@ -9,6 +10,7 @@ namespace InsurancePolicy.UI.MVC
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -24,17 +26,21 @@ namespace InsurancePolicy.UI.MVC
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-
             services.AddDbContext<InsurancePolicyDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("InsurancePolicyConnection")));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
             services.AddControllersWithViews();
-            
             services.AddRazorPages();
+
+            RegisterServices(services);
+        }
+
+        private static void RegisterServices(IServiceCollection services)
+        {
+            DependencyContainer.RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

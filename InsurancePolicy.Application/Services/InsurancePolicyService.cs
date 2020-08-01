@@ -4,14 +4,14 @@
     using Application.ViewModels;
     using Domain.Interfaces;
 
-    public class InsurancePolicyService : IInsurancePolicy
+    public class InsurancePolicyService : IInsurancePolicyService
     {
         public IInsurancePolicyRepository _insurancePolicyRepository;
         public InsurancePolicyService(IInsurancePolicyRepository insurancePolicyRepository)
         {
             _insurancePolicyRepository = insurancePolicyRepository;
         }
-        InsurancePolicyViewModel IInsurancePolicy.GetInsurancePolicies()
+        public InsurancePolicyViewModel GetInsurancePolicies()
         {
             return new InsurancePolicyViewModel()
             {

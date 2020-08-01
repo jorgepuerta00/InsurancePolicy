@@ -4,14 +4,14 @@
     using Application.ViewModels;
     using Domain.Interfaces;
 
-    public class RiskTypeService : IRiskType
+    public class RiskTypeService : IRiskTypeService
     {
         public IRiskTypeRepository _riskTypeRepository;
         public RiskTypeService(IRiskTypeRepository riskTypeRepository)
         {
             _riskTypeRepository = riskTypeRepository;
         }
-        RiskTypeViewModel IRiskType.GetRiskTypes()
+        public RiskTypeViewModel GetRiskTypes()
         {
             return new RiskTypeViewModel()
             {

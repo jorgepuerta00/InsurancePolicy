@@ -4,14 +4,14 @@
     using Application.ViewModels;
     using Domain.Interfaces;
 
-    public class StatusTypeService : IStatusType
+    public class StatusTypeService : IStatusTypeService
     {
         public IStatusTypeRepository _statusTypeRepository;
         public StatusTypeService(IStatusTypeRepository statusTypeRepository)
         {
             _statusTypeRepository = statusTypeRepository;
         }
-        StatusTypeViewModel IStatusType.GetStatusTypes()
+        public StatusTypeViewModel GetStatusTypes()
         {
             return new StatusTypeViewModel()
             {

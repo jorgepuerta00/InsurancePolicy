@@ -4,4 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\InsurancePolicy.Application\InsurancePolicy.Application.csproj" />
+    <ProjectReference Include="..\InsurancePolicy.Domain\InsurancePolicy.Domain.csproj" />
+    <ProjectReference Include="..\InsurancePolicy.Infrastructure.Data\InsurancePolicy.Infrastructure.Data.csproj" />
+  </ItemGroup>
+
 </Project>

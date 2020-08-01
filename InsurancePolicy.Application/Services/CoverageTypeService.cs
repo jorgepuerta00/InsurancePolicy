@@ -4,14 +4,14 @@
     using Application.ViewModels;
     using Domain.Interfaces;
 
-    public class CoverageTypeService : ICoverageType
+    public class CoverageTypeService : ICoverageTypeService
     {
         public ICoverageTypeRepository _coverageTypeRepository;
         public CoverageTypeService(ICoverageTypeRepository coverageTypeRepository)
         {
             _coverageTypeRepository = coverageTypeRepository;
         }
-        CoverageTypeViewModel ICoverageType.GetCoverageTypes()
+        public CoverageTypeViewModel GetCoverageTypes()
         {
             return new CoverageTypeViewModel()
             {

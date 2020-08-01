@@ -1,8 +1,8 @@
 ﻿namespace InsurancePolicy.Application.Interfaces
 {
     using Application.ViewModels;
-    public interface IInsurancePolicy
+    public interface ICoverageTypeService
     {
-        InsurancePolicyViewModel GetInsurancePolicies();
+        CoverageTypeViewModel GetCoverageTypes();
     }
 }
