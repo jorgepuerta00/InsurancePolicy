@@ -1,7 +1,8 @@
-﻿namespace InsurancePolicy.Infrastructure.Data.Context
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace InsurancePolicy.Infrastructure.Data.Context
 {
-    using Domain.Model;
-    using Microsoft.EntityFrameworkCore;
+    using Domain.Models;
     public class InsurancePolicyDbContext : DbContext
     {
         public InsurancePolicyDbContext(DbContextOptions options) : base(options) { }

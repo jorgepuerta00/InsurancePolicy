@@ -1,6 +1,7 @@
-﻿namespace InsurancePolicy.Domain.Model
+﻿using System;
+
+namespace InsurancePolicy.Domain.Models
 {
-    using System;
     public class InsurancePolicy
     {
         public int InsurancePolicyID { get; set; }

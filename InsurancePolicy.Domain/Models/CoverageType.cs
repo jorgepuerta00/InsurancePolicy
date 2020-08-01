@@ -1,4 +1,4 @@
-﻿namespace InsurancePolicy.Domain.Model
+﻿namespace InsurancePolicy.Domain.Models
 {
     public class CoverageType
     {
