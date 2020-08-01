@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InsurancePolicy.Infrastruct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsurancePolicy.Infrastructure.Data", "InsurancePolicy.Infrastructure.Data\InsurancePolicy.Infrastructure.Data.csproj", "{726F2D22-FF77-468C-91C8-02F43CE8F2CE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{BC8FE371-9EDA-49EF-8247-F48CAB8D10CC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InsurancePolicy.Application", "InsurancePolicy.Application", "{BC8FE371-9EDA-49EF-8247-F48CAB8D10CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsurancePolicy.Application", "InsurancePolicy.Application\InsurancePolicy.Application.csproj", "{001FD1A1-0633-44A7-A601-49C5B2689CC9}"
 EndProject
