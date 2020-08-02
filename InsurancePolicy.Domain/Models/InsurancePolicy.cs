@@ -2,7 +2,7 @@
 
 namespace InsurancePolicy.Domain.Models
 {
-    public class InsurancePolicy
+    public class InsurancePolicy : BaseEntity
     {
         public int InsurancePolicyID { get; set; }
         public string Name { get; set; }

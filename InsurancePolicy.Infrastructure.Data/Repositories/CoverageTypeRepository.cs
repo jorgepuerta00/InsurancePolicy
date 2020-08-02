@@ -40,6 +40,7 @@
         {
             using (_context)
             {
+
                 _context.CoverageTypes.Add(coverageType);
                 _context.SaveChanges();
             }

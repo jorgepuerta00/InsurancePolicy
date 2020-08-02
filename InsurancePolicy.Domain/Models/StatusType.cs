@@ -1,6 +1,6 @@
 ﻿namespace InsurancePolicy.Domain.Models
 {
-    public class StatusType
+    public class StatusType : BaseEntity
     {
         public int StatusTypeID { get; set; }
         public string StatusTypeCode { get; set; }

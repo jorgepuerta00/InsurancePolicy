@@ -7,33 +7,33 @@
 
     public class CoverageTypeService : ICoverageTypeService
     {
-        public ICoverageTypeRepository _coverageTypeRepository;
-        public CoverageTypeService(ICoverageTypeRepository coverageTypeRepository)
+        public IRepository<CoverageType> _coverageTypeRepository;
+        public CoverageTypeService(IRepository<CoverageType> coverageTypeRepository)
         {
             _coverageTypeRepository = coverageTypeRepository;
         }
 
-        public void CreateCoverageTypes(CoverageType coverageType)
+        public void CreateCoverageType(CoverageType coverageType)
         {
-            _coverageTypeRepository.CreateCoverageTypes(coverageType);
+            _coverageTypeRepository.Create(coverageType);
         }
 
-        public void DeleteCoverageTypes(CoverageType coverageType)
+        public void DeleteCoverageType(CoverageType coverageType)
         {
-            _coverageTypeRepository.DeleteCoverageTypes(coverageType);
+            _coverageTypeRepository.Delete(coverageType);
         }
 
         public CoverageTypeViewModel GetCoverageTypes()
         {
             return new CoverageTypeViewModel()
             {
-                CoverageTypes = _coverageTypeRepository.GetCoverageTypes()
+                CoverageTypes = _coverageTypeRepository.GetAll()
             };
         }
 
-        public void UpdateCoverageTypes(CoverageType coverageType)
+        public void UpdateCoverageType(CoverageType coverageType)
         {
-            _coverageTypeRepository.UpdateCoverageTypes(coverageType);
+            _coverageTypeRepository.Update(coverageType);
         }
     }
 }

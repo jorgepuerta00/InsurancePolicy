@@ -5,9 +5,9 @@
 
     public interface ICoverageTypeService
     {
-        void CreateCoverageTypes(CoverageType coverageType);
-        void UpdateCoverageTypes(CoverageType coverageType);
+        void CreateCoverageType(CoverageType coverageType);
+        void UpdateCoverageType(CoverageType coverageType);
         CoverageTypeViewModel GetCoverageTypes();
-        void DeleteCoverageTypes(CoverageType coverageType);
+        void DeleteCoverageType(CoverageType coverageType);
     }
 }
