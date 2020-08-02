@@ -12,9 +12,37 @@
         {
             _context = context;
         }
+
+        public void CreateCoverageTypes(CoverageType coverageType)
+        {
+            using (_context)
+            {
+                _context.CoverageTypes.Add(coverageType);
+                _context.SaveChanges();
+            }
+        }
+
+        public void DeleteCoverageTypes(CoverageType coverageType)
+        {
+            using (_context)
+            {
+                _context.CoverageTypes.Remove(coverageType);
+                _context.SaveChanges();
+            }
+        }
+
         public IEnumerable<CoverageType> GetCoverageTypes()
         {
             return _context.CoverageTypes;
+        }
+
+        public void UpdateCoverageTypes(CoverageType coverageType)
+        {
+            using (_context)
+            {
+                _context.CoverageTypes.Add(coverageType);
+                _context.SaveChanges();
+            }
         }
     }
 }
