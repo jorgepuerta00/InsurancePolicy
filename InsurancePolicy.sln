@@ -27,6 +27,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InsurancePolicy.UnitTest.Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsurancePolicy.UnitTest.Test", "InsurancePolicy.UnitTest.Test\InsurancePolicy.UnitTest.Test.csproj", "{64A7C2DD-94B2-4E58-8FF1-4C30876E390D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InsurancePolicy.Api", "InsurancePolicy.Api", "{DDB2ED49-FEDA-49B8-A315-E4C7323A4B67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsurancePolicy.Api", "InsurancePolicy.Api\InsurancePolicy.Api.csproj", "{E29FE32F-F580-4E8F-ABC8-2AEA3D92B346}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InsurancePolicy.Client.Api", "InsurancePolicy.Client.Api", "{420C0C4C-D593-4B76-AEC5-57513766CE5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsurancePolicy.Client.Api", "InsurancePolicy.Client.Api\InsurancePolicy.Client.Api.csproj", "{40EF9BFA-9CD4-47AC-A51C-1E9F65550570}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +65,14 @@ Global
 		{64A7C2DD-94B2-4E58-8FF1-4C30876E390D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64A7C2DD-94B2-4E58-8FF1-4C30876E390D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64A7C2DD-94B2-4E58-8FF1-4C30876E390D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E29FE32F-F580-4E8F-ABC8-2AEA3D92B346}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E29FE32F-F580-4E8F-ABC8-2AEA3D92B346}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E29FE32F-F580-4E8F-ABC8-2AEA3D92B346}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E29FE32F-F580-4E8F-ABC8-2AEA3D92B346}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40EF9BFA-9CD4-47AC-A51C-1E9F65550570}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40EF9BFA-9CD4-47AC-A51C-1E9F65550570}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40EF9BFA-9CD4-47AC-A51C-1E9F65550570}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40EF9BFA-9CD4-47AC-A51C-1E9F65550570}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +84,8 @@ Global
 		{001FD1A1-0633-44A7-A601-49C5B2689CC9} = {BC8FE371-9EDA-49EF-8247-F48CAB8D10CC}
 		{6DE78589-2CAB-4DDB-84EA-F18836CBBEB3} = {70BE9C46-377C-4B6B-8D0D-7EC37951AC9E}
 		{64A7C2DD-94B2-4E58-8FF1-4C30876E390D} = {9362742B-D4D0-4773-ACF9-F0DB76D8F227}
+		{E29FE32F-F580-4E8F-ABC8-2AEA3D92B346} = {DDB2ED49-FEDA-49B8-A315-E4C7323A4B67}
+		{40EF9BFA-9CD4-47AC-A51C-1E9F65550570} = {420C0C4C-D593-4B76-AEC5-57513766CE5D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DBC28EA7-AEE0-4529-8909-62804278A96A}

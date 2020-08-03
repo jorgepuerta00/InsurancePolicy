@@ -20,8 +20,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\InsurancePolicy.Infrastructure.Data\InsurancePolicy.Infrastructure.Data.csproj" />
-    <ProjectReference Include="..\InsurancePolicy.Infrastructure.IoC\InsurancePolicy.Infrastructure.IoC.csproj" />
+    <ProjectReference Include="..\InsurancePolicy.Application\InsurancePolicy.Application.csproj" />
   </ItemGroup>
 
 </Project>

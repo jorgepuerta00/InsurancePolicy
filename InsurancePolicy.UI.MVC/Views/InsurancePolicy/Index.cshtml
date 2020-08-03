@@ -95,9 +95,6 @@
         var txtStartdate = $("#txtStartdate");
         var txtTotalCost = $("#txtTotalCost");
         var txtRiskTypeID = $("#txtRiskTypeID");
-
-        alert(txtName.val())
-
         $.ajax({
             type: "POST",
             url: "/InsurancePolicy/CreateInsurancePolicy",
