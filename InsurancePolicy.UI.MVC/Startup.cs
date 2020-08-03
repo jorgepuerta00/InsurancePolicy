@@ -9,6 +9,7 @@ namespace InsurancePolicy.UI.MVC
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using AutoMapper;
+    using InsurancePolicy.Client.Api;
 
     public class Startup
     {
@@ -31,6 +32,9 @@ namespace InsurancePolicy.UI.MVC
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddSingleton<InsurancePolicyClient>(Endpoint => new InsurancePolicyClient(
+                    Configuration.GetValue<string>("Endpoint:DefaultEndpoint")
+                ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

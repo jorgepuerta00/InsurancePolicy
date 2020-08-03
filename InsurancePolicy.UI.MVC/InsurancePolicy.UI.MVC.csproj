@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InsurancePolicy.Application\InsurancePolicy.Application.csproj" />
+    <ProjectReference Include="..\InsurancePolicy.Client.Api\InsurancePolicy.Client.Api.csproj" />
   </ItemGroup>
 
 </Project>
