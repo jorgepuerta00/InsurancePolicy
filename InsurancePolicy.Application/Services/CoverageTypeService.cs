@@ -1,21 +1,40 @@
-﻿using System;
-
-namespace InsurancePolicy.Application.Services
+﻿namespace InsurancePolicy.Application.Services
 {
-    using Application.Interfaces;
-    using Application.ViewModels;
+    using Interfaces;
+    using ViewModels;
     using Domain.Interfaces;
+    using Domain.Models;
+    using System.Collections.Generic;
 
-    public class CoverageTypeService : ICoverageType
+    public class CoverageTypeService : BaseData, ICoverageTypeService
     {
-        public ICoverageTypeRepository _coverageTypeRepository;
-        public CoverageTypeService(ICoverageTypeRepository coverageTypeRepository)
+        public IRepository<CoverageType> _coverageTypeRepository;
+        public CoverageTypeService(IRepository<CoverageType> coverageTypeRepository)
         {
             _coverageTypeRepository = coverageTypeRepository;
         }
-        CoverageTypeViewModel ICoverageType.GetCoverageTypes()
+
+        public void CreateCoverageType(CoverageTypeViewModel coverageTypeViewModel)
         {
-            throw new NotImplementedException();
+            var coverageType = this._mapper.Map<CoverageTypeViewModel, CoverageType>(coverageTypeViewModel);
+            _coverageTypeRepository.Create(coverageType);
+        }
+
+        public void DeleteCoverageType(CoverageTypeViewModel coverageTypeViewModel)
+        {
+            var coverageType = this._mapper.Map<CoverageTypeViewModel, CoverageType>(coverageTypeViewModel);
+            _coverageTypeRepository.Delete(coverageType);
+        }
+
+        public IEnumerable<CoverageTypeViewModel> GetCoverageTypes()
+        {
+            return this._mapper.Map<IEnumerable<CoverageType>, IEnumerable<CoverageTypeViewModel>>(_coverageTypeRepository.GetAll());
+        }
+
+        public void UpdateCoverageType(CoverageTypeViewModel coverageTypeViewModel)
+        {
+            var coverageType = this._mapper.Map<CoverageTypeViewModel, CoverageType>(coverageTypeViewModel);
+            _coverageTypeRepository.Update(coverageType);
         }
     }
 }

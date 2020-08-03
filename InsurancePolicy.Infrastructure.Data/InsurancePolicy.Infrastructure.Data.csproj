@@ -18,10 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\InsurancePolicy.Domain\InsurancePolicy.Domain.csproj" />
   </ItemGroup>
 

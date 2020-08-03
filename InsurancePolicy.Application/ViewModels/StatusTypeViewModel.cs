@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     public class StatusTypeViewModel
     {
-        public IEnumerable<StatusType> Books { get; set; }
+        public int StatusTypeID { get; set; }
+        public string StatusTypeCode { get; set; }
+        public string StatusTypeName { get; set; }
     }
 }

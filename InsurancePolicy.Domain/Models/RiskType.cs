@@ -1,6 +1,6 @@
 ﻿namespace InsurancePolicy.Domain.Models
 {
-    public class RiskType
+    public class RiskType : BaseEntity
     {
         public int RiskTypeID { get; set; }
         public string RiskTypeCode { get; set; }

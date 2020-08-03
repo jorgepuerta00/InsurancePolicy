@@ -1,21 +1,40 @@
-﻿using System;
-
-namespace InsurancePolicy.Application.Services
+﻿namespace InsurancePolicy.Application.Services
 {
-    using Application.Interfaces;
-    using Application.ViewModels;
+    using Interfaces;
+    using ViewModels;
     using Domain.Interfaces;
+    using InsurancePolicy.Domain.Models;
+    using System.Collections.Generic;
 
-    public class InsurancePolicyService : IInsurancePolicy
+    public class InsurancePolicyService : BaseData, IInsurancePolicyService
     {
-        public IInsurancePolicyRepository _InsurancePolicyRepository;
-        public InsurancePolicyService(IInsurancePolicyRepository InsurancePolicyRepository)
+        public IRepository<InsurancePolicy> _insurancePolicyRepository;
+        public InsurancePolicyService(IRepository<InsurancePolicy> insurancePolicyRepository)
         {
-            _InsurancePolicyRepository = InsurancePolicyRepository;
+            _insurancePolicyRepository = insurancePolicyRepository;
         }
-        InsurancePolicyViewModel IInsurancePolicy.GetInsurancePolicies()
+
+        public void CreateInsurancePolicy(InsurancePolicyViewModel insurancePolicyViewModel)
         {
-            throw new NotImplementedException();
+            var insurancePolicy = this._mapper.Map<InsurancePolicyViewModel, InsurancePolicy>(insurancePolicyViewModel);
+            _insurancePolicyRepository.Create(insurancePolicy);
+        }
+
+        public void DeleteInsurancePolicy(InsurancePolicyViewModel insurancePolicyViewModel)
+        {
+            var insurancePolicy = this._mapper.Map<InsurancePolicyViewModel, InsurancePolicy>(insurancePolicyViewModel);
+            _insurancePolicyRepository.Delete(insurancePolicy);
+        }
+
+        public IEnumerable<InsurancePolicyViewModel> GetInsurancePolicies()
+        {
+            return this._mapper.Map<IEnumerable<InsurancePolicy>, IEnumerable<InsurancePolicyViewModel>>(_insurancePolicyRepository.GetAll());
+        }
+
+        public void UpdateInsurancePolicy(InsurancePolicyViewModel insurancePolicyViewModel)
+        {
+            var insurancePolicy = this._mapper.Map<InsurancePolicyViewModel, InsurancePolicy>(insurancePolicyViewModel);
+            _insurancePolicyRepository.Update(insurancePolicy);
         }
     }
 }

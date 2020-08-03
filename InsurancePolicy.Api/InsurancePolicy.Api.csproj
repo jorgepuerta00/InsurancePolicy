@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InsurancePolicy.Infrastructure.Data\InsurancePolicy.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\InsurancePolicy.Infrastructure.IoC\InsurancePolicy.Infrastructure.IoC.csproj" />
+  </ItemGroup>
+
+
+</Project>

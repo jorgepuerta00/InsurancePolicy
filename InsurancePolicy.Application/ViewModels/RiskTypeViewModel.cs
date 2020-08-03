@@ -4,6 +4,9 @@
     using System.Collections.Generic;
     public class RiskTypeViewModel
     {
-        public IEnumerable<RiskType> Books { get; set; }
+        public int RiskTypeID { get; set; }
+        public string RiskTypeCode { get; set; }
+        public string RiskTypeName { get; set; }
+        public int MaxCoverage { get; set; }
     }
 }

@@ -1,21 +1,40 @@
-﻿using System;
-
-namespace InsurancePolicy.Application.Services
+﻿namespace InsurancePolicy.Application.Services
 {
-    using Application.Interfaces;
-    using Application.ViewModels;
+    using Interfaces;
+    using ViewModels;
     using Domain.Interfaces;
+    using Domain.Models;
+    using System.Collections.Generic;
 
-    public class StatusTypeService : IStatusType
+    public class StatusTypeService : BaseData, IStatusTypeService
     {
-        public IStatusTypeRepository _StatusTypeRepository;
-        public StatusTypeService(IStatusTypeRepository StatusTypeRepository)
+        public IRepository<StatusType> _statusTypeRepository;
+        public StatusTypeService(IRepository<StatusType> statusTypeRepository)
         {
-            _StatusTypeRepository = StatusTypeRepository;
+            _statusTypeRepository = statusTypeRepository;
         }
-        StatusTypeViewModel IStatusType.GetStatusTypes()
+
+        public void CreateStatusType(StatusTypeViewModel statusTypeViewModel)
         {
-            throw new NotImplementedException();
+            var statusType = this._mapper.Map<StatusTypeViewModel, StatusType>(statusTypeViewModel);
+            _statusTypeRepository.Create(statusType);
+        }
+
+        public void DeleteStatusType(StatusTypeViewModel statusTypeViewModel)
+        {
+            var statusType = this._mapper.Map<StatusTypeViewModel, StatusType>(statusTypeViewModel);
+            _statusTypeRepository.Delete(statusType);
+        }
+
+        public IEnumerable<StatusTypeViewModel> GetStatusTypes()
+        {
+            return this._mapper.Map<IEnumerable<StatusType>, IEnumerable<StatusTypeViewModel>>(_statusTypeRepository.GetAll());
+        }
+
+        public void UpdateStatusType(StatusTypeViewModel statusTypeViewModel)
+        {
+            var statusType = this._mapper.Map<StatusTypeViewModel, StatusType>(statusTypeViewModel);
+            _statusTypeRepository.Update(statusType);
         }
     }
 

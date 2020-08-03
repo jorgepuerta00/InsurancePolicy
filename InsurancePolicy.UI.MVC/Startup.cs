@@ -1,6 +1,5 @@
 namespace InsurancePolicy.UI.MVC
 {
-    using Infrastructure.Data.Context;
     using InsurancePolicy.UI.MVC.Data;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -9,6 +8,9 @@ namespace InsurancePolicy.UI.MVC
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using AutoMapper;
+    using InsurancePolicy.Client.Api;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -25,16 +27,14 @@ namespace InsurancePolicy.UI.MVC
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<InsurancePolicyDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("InsurancePolicyConnection")));
-
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
             services.AddControllersWithViews();
-            
             services.AddRazorPages();
+
+            services.AddSingleton<InsurancePolicyClient>(Endpoint => new InsurancePolicyClient(
+                    Configuration.GetValue<string>("Endpoint:DefaultEndpoint")
+                ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
