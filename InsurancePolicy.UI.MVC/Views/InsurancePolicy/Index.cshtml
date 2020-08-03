@@ -1,4 +1,4 @@
-﻿@model InsurancePolicy.Application.ViewModels.InsurancePolicyViewModel
+﻿@model IEnumerable<InsurancePolicy.Application.ViewModels.InsurancePolicyViewModel>
 
 <table id="tblInsurancePolicy" class="table table-bordered table-hover">
     <thead>
@@ -15,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var obj in Model.InsurancePolicies)
+        @foreach (var obj in Model)
         {
             <tr style="height: 60px">
                 <td style="width:150px">@obj.Name</td>

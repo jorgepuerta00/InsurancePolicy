@@ -14,6 +14,5 @@
         public DateTime Startdate { get; set; }
         public float TotalCost { get; set; }
         public int RiskTypeID { get; set; }
-        public IEnumerable<InsurancePolicy> InsurancePolicies { get; set; }
     }
 }

@@ -4,6 +4,7 @@
     using ViewModels;
     using Domain.Interfaces;
     using Domain.Models;
+    using System.Collections.Generic;
 
     public class CoverageTypeService : BaseData, ICoverageTypeService
     {
@@ -25,12 +26,9 @@
             _coverageTypeRepository.Delete(coverageType);
         }
 
-        public CoverageTypeViewModel GetCoverageTypes()
+        public IEnumerable<CoverageTypeViewModel> GetCoverageTypes()
         {
-            return new CoverageTypeViewModel()
-            {
-                CoverageTypes = _coverageTypeRepository.GetAll()
-            };
+            return this._mapper.Map<IEnumerable<CoverageType>, IEnumerable<CoverageTypeViewModel>>(_coverageTypeRepository.GetAll());
         }
 
         public void UpdateCoverageType(CoverageTypeViewModel coverageTypeViewModel)

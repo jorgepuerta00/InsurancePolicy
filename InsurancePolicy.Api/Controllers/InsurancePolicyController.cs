@@ -1,9 +1,5 @@
 ﻿namespace InsurancePolicy.Api.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using InsurancePolicy.Application.Interfaces;
     using InsurancePolicy.Application.ViewModels;
     using Microsoft.AspNetCore.Mvc;
@@ -14,9 +10,11 @@
     public class InsurancePolicyController : ControllerBase
     {
         private readonly IInsurancePolicyService _insurancePolicyService;
+        private readonly ILogger<InsurancePolicyController> _logger;
 
-        public InsurancePolicyController(IInsurancePolicyService insuranceService)
+        public InsurancePolicyController(ILogger<InsurancePolicyController> logger, IInsurancePolicyService insuranceService)
         {
+            _logger = logger;
             _insurancePolicyService = insuranceService;
         }
 
@@ -25,7 +23,7 @@
         {
             try
             {
-                return this.Ok(_insurancePolicyService.GetInsurancePolicies().InsurancePolicies);
+                return this.Ok(_insurancePolicyService.GetInsurancePolicies());
             }
             catch
             {

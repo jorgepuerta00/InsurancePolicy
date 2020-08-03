@@ -4,6 +4,7 @@
     using ViewModels;
     using Domain.Interfaces;
     using Domain.Models;
+    using System.Collections.Generic;
 
     public class StatusTypeService : BaseData, IStatusTypeService
     {
@@ -25,12 +26,9 @@
             _statusTypeRepository.Delete(statusType);
         }
 
-        public StatusTypeViewModel GetStatusTypes()
+        public IEnumerable<StatusTypeViewModel> GetStatusTypes()
         {
-            return new StatusTypeViewModel()
-            {
-                StatusTypes = _statusTypeRepository.GetAll()
-            };
+            return this._mapper.Map<IEnumerable<StatusType>, IEnumerable<StatusTypeViewModel>>(_statusTypeRepository.GetAll());
         }
 
         public void UpdateStatusType(StatusTypeViewModel statusTypeViewModel)

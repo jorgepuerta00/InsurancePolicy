@@ -4,6 +4,7 @@
     using ViewModels;
     using Domain.Interfaces;
     using Domain.Models;
+    using System.Collections.Generic;
 
     public class RiskTypeService : BaseData, IRiskTypeService
     {
@@ -25,12 +26,10 @@
             _riskTypeRepository.Delete(riskType);
         }
 
-        public RiskTypeViewModel GetRiskTypes()
+        public IEnumerable<RiskTypeViewModel> GetRiskTypes()
         {
-            return new RiskTypeViewModel()
-            {
-                RiskTypes = _riskTypeRepository.GetAll()
-            };
+            return this._mapper.Map<IEnumerable<RiskType>, IEnumerable<RiskTypeViewModel>>(_riskTypeRepository.GetAll());
+
         }
 
         public void UpdateRiskType(RiskTypeViewModel riskTypeViewModel)

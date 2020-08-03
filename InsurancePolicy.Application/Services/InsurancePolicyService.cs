@@ -4,6 +4,7 @@
     using ViewModels;
     using Domain.Interfaces;
     using InsurancePolicy.Domain.Models;
+    using System.Collections.Generic;
 
     public class InsurancePolicyService : BaseData, IInsurancePolicyService
     {
@@ -25,12 +26,9 @@
             _insurancePolicyRepository.Delete(insurancePolicy);
         }
 
-        public InsurancePolicyViewModel GetInsurancePolicies()
+        public IEnumerable<InsurancePolicyViewModel> GetInsurancePolicies()
         {
-            return new InsurancePolicyViewModel()
-            {
-                InsurancePolicies = _insurancePolicyRepository.GetAll()
-            };
+            return this._mapper.Map<IEnumerable<InsurancePolicy>, IEnumerable<InsurancePolicyViewModel>>(_insurancePolicyRepository.GetAll());
         }
 
         public void UpdateInsurancePolicy(InsurancePolicyViewModel insurancePolicyViewModel)

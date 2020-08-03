@@ -4,6 +4,7 @@
     using Application.ViewModels;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
 
     public class InsurancePolicyController : Controller
     {
@@ -17,7 +18,7 @@
         [Authorize]
         public IActionResult Index()
         {
-            InsurancePolicyViewModel model = _insurancePolicyService.GetInsurancePolicies();
+            IEnumerable<InsurancePolicyViewModel> model = _insurancePolicyService.GetInsurancePolicies();
             return View(model);
         }
 
