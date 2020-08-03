@@ -10,6 +10,7 @@ namespace InsurancePolicy.UI.MVC
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using AutoMapper;
 
     public class Startup
     {
@@ -36,6 +37,9 @@ namespace InsurancePolicy.UI.MVC
             services.AddRazorPages();
 
             RegisterServices(services);
+
+            services.AddAutoMapper(typeof(Startup));
+
         }
 
         private static void RegisterServices(IServiceCollection services)

@@ -1,11 +1,11 @@
 ﻿namespace InsurancePolicy.Application.Services
 {
-    using Application.Interfaces;
-    using Application.ViewModels;
+    using Interfaces;
+    using ViewModels;
     using Domain.Interfaces;
     using Domain.Models;
 
-    public class CoverageTypeService : ICoverageTypeService
+    public class CoverageTypeService : BaseData, ICoverageTypeService
     {
         public IRepository<CoverageType> _coverageTypeRepository;
         public CoverageTypeService(IRepository<CoverageType> coverageTypeRepository)
@@ -13,13 +13,15 @@
             _coverageTypeRepository = coverageTypeRepository;
         }
 
-        public void CreateCoverageType(CoverageType coverageType)
+        public void CreateCoverageType(CoverageTypeViewModel coverageTypeViewModel)
         {
+            var coverageType = this._mapper.Map<CoverageTypeViewModel, CoverageType>(coverageTypeViewModel);
             _coverageTypeRepository.Create(coverageType);
         }
 
-        public void DeleteCoverageType(CoverageType coverageType)
+        public void DeleteCoverageType(CoverageTypeViewModel coverageTypeViewModel)
         {
+            var coverageType = this._mapper.Map<CoverageTypeViewModel, CoverageType>(coverageTypeViewModel);
             _coverageTypeRepository.Delete(coverageType);
         }
 
@@ -31,8 +33,9 @@
             };
         }
 
-        public void UpdateCoverageType(CoverageType coverageType)
+        public void UpdateCoverageType(CoverageTypeViewModel coverageTypeViewModel)
         {
+            var coverageType = this._mapper.Map<CoverageTypeViewModel, CoverageType>(coverageTypeViewModel);
             _coverageTypeRepository.Update(coverageType);
         }
     }

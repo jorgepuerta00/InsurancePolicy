@@ -20,5 +20,26 @@
             InsurancePolicyViewModel model = _insurancePolicyService.GetInsurancePolicies();
             return View(model);
         }
+
+        [HttpPost]
+        public JsonResult CreateInsurancePolicy(InsurancePolicyViewModel InsurancePolicy)
+        {
+            _insurancePolicyService.CreateInsurancePolicy(InsurancePolicy);
+            return Json(InsurancePolicy);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateInsurancePolicy(InsurancePolicyViewModel InsurancePolicy)
+        {
+            _insurancePolicyService.UpdateInsurancePolicy(InsurancePolicy);
+            return new EmptyResult();
+        }
+
+        [HttpPost]
+        public ActionResult DeleteInsurancePolicy(InsurancePolicyViewModel InsurancePolicy)
+        {
+            _insurancePolicyService.DeleteInsurancePolicy(InsurancePolicy);
+            return new EmptyResult();
+        }
     }
 }

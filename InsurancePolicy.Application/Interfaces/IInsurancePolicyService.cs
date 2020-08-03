@@ -1,13 +1,12 @@
 ﻿namespace InsurancePolicy.Application.Interfaces
 {
     using Application.ViewModels;
-    using Domain.Models;
 
     public interface IInsurancePolicyService
     {
+        void CreateInsurancePolicy(InsurancePolicyViewModel insurancePolicy);
+        void UpdateInsurancePolicy(InsurancePolicyViewModel insurancePolicy);
         InsurancePolicyViewModel GetInsurancePolicies();
-        void CreateInsurancePolicy(InsurancePolicy insurancePolicy);
-        void UpdateInsurancePolicy(InsurancePolicy insurancePolicy);
-        void DeleteInsurancePolicy(InsurancePolicy insurancePolicy);
+        void DeleteInsurancePolicy(InsurancePolicyViewModel insurancePolicy);
     }
 }

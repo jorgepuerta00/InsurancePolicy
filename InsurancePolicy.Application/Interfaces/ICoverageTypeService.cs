@@ -1,13 +1,12 @@
 ﻿namespace InsurancePolicy.Application.Interfaces
 {
     using Application.ViewModels;
-    using Domain.Models;
 
     public interface ICoverageTypeService
     {
-        void CreateCoverageType(CoverageType coverageType);
-        void UpdateCoverageType(CoverageType coverageType);
+        void CreateCoverageType(CoverageTypeViewModel coverageType);
+        void UpdateCoverageType(CoverageTypeViewModel coverageType);
         CoverageTypeViewModel GetCoverageTypes();
-        void DeleteCoverageType(CoverageType coverageType);
+        void DeleteCoverageType(CoverageTypeViewModel coverageType);
     }
 }

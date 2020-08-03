@@ -1,31 +1,205 @@
 ﻿@model InsurancePolicy.Application.ViewModels.InsurancePolicyViewModel
 
-<table id="book" class="table table-bordered table-hover">
+<table id="tblInsurancePolicy" class="table table-bordered table-hover">
     <thead>
-        <tr class="">
+        <tr>
             <th>Nombre</th>
-            <th>Descriptión</th>
+            <th>Descripción</th>
             <th>Tipo Cobertura</th>
             <th>Cobertura %</th>
-            <th>Fecha Inicio Vigencia</th>
             <th>Periodo de Cobertura (meses)</th>
+            <th>Fecha Inicio Vigencia</th>
             <th>Precio</th>
             <th>Tipo de Riesgo</th>
+            <th>Opciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var obj in Model.InsurancePolicies)
         {
-        <tr style="height: 60px;">
-            <td>@obj.Name</td>
-            <td>@obj.Description</td>
-            <td>@obj.CoverageTypeID</td>
-            <td>@obj.CoveragePercentage</td>
-            <td>@obj.CoverageTimeElapsed</td>
-            <td>@obj.Startdate</td>
-            <td>@obj.TotalCost</td>
-            <td>@obj.RiskTypeID</td>
-        </tr>
+            <tr style="height: 60px">
+                <td style="width:150px">@obj.Name</td>
+                <td style="width:150px">@obj.Description</td>
+                <td style="width:150px">@obj.CoverageTypeID</td>
+                <td style="width:150px">@obj.CoveragePercentage</td>
+                <td style="width:150px">@obj.CoverageTimeElapsed</td>
+                <td style="width:150px">@obj.Startdate</td>
+                <td style="width:150px">@obj.TotalCost</td>
+                <td style="width:150px">@obj.RiskTypeID</td>
+                <td style="width:200px">
+                    <a class="Edit" href="javascript:;">Editar</a>
+                    <a class="Update" href="javascript:;" style="display:none">Actualizar</a>
+                    <a class="Cancel" href="javascript:;" style="display:none">Cancelar</a>
+                    <a class="Delete" href="javascript:;">Eliminar</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+<table border="0" cellpadding="0" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Tipo Cobertura</th>
+            <th>Cobertura %</th>
+            <th>Periodo de Cobertura (meses)</th>
+            <th>Fecha Inicio Vigencia</th>
+            <th>Precio</th>
+            <th>Tipo de Riesgo</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tr style="height: 60px">
+        <td style="width: 150px">
+            <input type="text" id="txtName" style="width:100px" />
+        </td>
+        <td style="width: 150px">
+            <input type="text" id="txtDescription" style="width:100px" />
+        </td>
+        <td style="width: 150px">
+            <input type="text" id="txtCoverageTypeID" style="width:100px" />
+        </td>
+        <td style="width: 150px">
+            <input type="text" id="txtCoveragePercentage" style="width:100px" />
+        </td>
+        <td style="width: 150px">
+            <input type="text" id="txtCoverageTimeElapsed" style="width:100px" />
+        </td>
+        <td style="width: 150px">
+            <input type="text" id="txtStartdate" style="width:100px" />
+        </td>
+        <td style="width: 150px">
+            <input type="text" id="txtTotalCost" style="width:100px" />
+        </td>
+        <td style="width: 150px">
+            <input type="text" id="txtRiskTypeID" style="width:100px" />
+        </td>
+        <td style="width: 200px">
+            <input type="button" id="btnAdd" value="Add" />
+        </td>
+    </tr>
+</table>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+
+<script type="text/javascript">
+    //Add event handler.
+    $("body").on("click", "#btnAdd", function () {
+        var txtName = $("#txtName");
+        var txtDescription = $("#txtDescription");
+        var txtCoverageTypeID = $("#txtCoverageTypeID");
+        var txtCoveragePercentage = $("#txtCoveragePercentage");
+        var txtCoverageTimeElapsed = $("#txtCoverageTimeElapsed");
+        var txtStartdate = $("#txtStartdate");
+        var txtTotalCost = $("#txtTotalCost");
+        var txtRiskTypeID = $("#txtRiskTypeID");
+
+        alert(txtName.val())
+
+        $.ajax({
+            type: "POST",
+            url: "/InsurancePolicy/CreateInsurancePolicy",
+            data: '{Name: "' + txtName.val() + '", Description: "' + txtDescription.val() + '", CoveragePercentage: "' + txtCoveragePercentage.val() + '", CoverageTimeElapsed: "' + txtCoverageTimeElapsed.val() + '", Startdate: "' + txtStartdate.val() + '", TotalCost: "' + txtTotalCost.val() + '", RiskTypeID: "' + txtRiskTypeID.val() + '" }', contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                txtName.val("");
+                txtDescription.val("");
+                txtCoverageTypeID.val("");
+                txtCoveragePercentage.val("");
+                txtCoverageTimeElapsed.val("");
+                txtStartdate.val("");
+                txtTotalCost.val("");
+                txtRiskTypeID.val("");
+            }
+        });
+    });
+
+    //Edit event handler.
+    $("body").on("click", "#tblInsurancePolicy .Edit", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                $(this).find("input").show();
+                $(this).find("span").hide();
+            }
+        });
+        row.find(".Update").show();
+        row.find(".Cancel").show();
+        row.find(".Delete").hide();
+        $(this).hide();
+    });
+
+    //Update event handler.
+    $("body").on("click", "#tblInsurancePolicy .Update", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                var span = $(this).find("span");
+                var input = $(this).find("input");
+                span.html(input.val());
+                span.show();
+                input.hide();
+            }
+        });
+        row.find(".Edit").show();
+        row.find(".Delete").show();
+        row.find(".Cancel").hide();
+        $(this).hide();
+
+        var insurancePolicy = {};
+        insurancePolicy.InsurancePolicyId = row.find(".InsurancePolicyId").find("span").html();
+        insurancePolicy.Name = row.find(".Name").find("span").html();
+        insurancePolicy.Country = row.find(".Country").find("span").html();
+        $.ajax({
+            type: "POST",
+            url: "/InsurancePolicy/UpdateInsurancePolicy",
+            data: '{insurancePolicy:' + JSON.stringify(insurancePolicy) + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        });
+    });
+
+    //Cancel event handler.
+    $("body").on("click", "#tblInsurancePolicy .Cancel", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                var span = $(this).find("span");
+                var input = $(this).find("input");
+                input.val(span.html());
+                span.show();
+                input.hide();
+            }
+        });
+        row.find(".Edit").show();
+        row.find(".Delete").show();
+        row.find(".Update").hide();
+        $(this).hide();
+    });
+
+    //Delete event handler.
+    $("body").on("click", "#tblInsurancePolicy .Delete", function () {
+        if (confirm("Deseas eliminar este registro?")) {
+            var row = $(this).closest("tr");
+            var insurancePolicyId = row.find("span").html();
+            $.ajax({
+                type: "POST",
+                url: "/InsurancePolicy/DeleteInsurancePolicy",
+                data: '{insurancePolicyId: ' + insurancePolicyId + '}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if ($("#tblInsurancePolicy tr").length > 2) {
+                        row.remove();
+                    } else {
+                        row.find(".Edit").hide();
+                        row.find(".Delete").hide();
+                        row.find("span").html('&nbsp;');
+                    }
+                }
+            });
+        }
+    });
+</script>

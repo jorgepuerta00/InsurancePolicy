@@ -4,6 +4,9 @@
     using System.Collections.Generic;
     public class CoverageTypeViewModel
     {
+        public int CoverageTypeID { get; set; }
+        public string CoverageTypeCode { get; set; }
+        public string CoverageTypeName { get; set; }
         public IEnumerable<CoverageType> CoverageTypes { get; set; }
     }
 }

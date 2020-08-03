@@ -1,11 +1,11 @@
 ﻿namespace InsurancePolicy.Application.Services
 {
-    using Application.Interfaces;
-    using Application.ViewModels;
+    using Interfaces;
+    using ViewModels;
     using Domain.Interfaces;
     using Domain.Models;
 
-    public class RiskTypeService : IRiskTypeService
+    public class RiskTypeService : BaseData, IRiskTypeService
     {
         public IRepository<RiskType> _riskTypeRepository;
         public RiskTypeService(IRepository<RiskType> riskTypeRepository)
@@ -13,13 +13,15 @@
             _riskTypeRepository = riskTypeRepository;
         }
 
-        public void CreateRiskType(RiskType riskType)
+        public void CreateRiskType(RiskTypeViewModel riskTypeViewModel)
         {
+            var riskType = this._mapper.Map<RiskTypeViewModel, RiskType>(riskTypeViewModel);
             _riskTypeRepository.Create(riskType);
         }
 
-        public void DeleteRiskType(RiskType riskType)
+        public void DeleteRiskType(RiskTypeViewModel riskTypeViewModel)
         {
+            var riskType = this._mapper.Map<RiskTypeViewModel, RiskType>(riskTypeViewModel);
             _riskTypeRepository.Delete(riskType);
         }
 
@@ -31,8 +33,9 @@
             };
         }
 
-        public void UpdateRiskType(RiskType riskType)
+        public void UpdateRiskType(RiskTypeViewModel riskTypeViewModel)
         {
+            var riskType = this._mapper.Map<RiskTypeViewModel, RiskType>(riskTypeViewModel);
             _riskTypeRepository.Update(riskType);
         }
     }

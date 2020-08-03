@@ -1,11 +1,11 @@
 ﻿namespace InsurancePolicy.Application.Services
 {
-    using Application.Interfaces;
-    using Application.ViewModels;
+    using Interfaces;
+    using ViewModels;
     using Domain.Interfaces;
     using Domain.Models;
 
-    public class StatusTypeService : IStatusTypeService
+    public class StatusTypeService : BaseData, IStatusTypeService
     {
         public IRepository<StatusType> _statusTypeRepository;
         public StatusTypeService(IRepository<StatusType> statusTypeRepository)
@@ -13,13 +13,15 @@
             _statusTypeRepository = statusTypeRepository;
         }
 
-        public void CreateStatusType(StatusType statusType)
+        public void CreateStatusType(StatusTypeViewModel statusTypeViewModel)
         {
+            var statusType = this._mapper.Map<StatusTypeViewModel, StatusType>(statusTypeViewModel);
             _statusTypeRepository.Create(statusType);
         }
 
-        public void DeleteStatusType(StatusType statusType)
+        public void DeleteStatusType(StatusTypeViewModel statusTypeViewModel)
         {
+            var statusType = this._mapper.Map<StatusTypeViewModel, StatusType>(statusTypeViewModel);
             _statusTypeRepository.Delete(statusType);
         }
 
@@ -31,8 +33,9 @@
             };
         }
 
-        public void UpdateStatusType(StatusType statusType)
+        public void UpdateStatusType(StatusTypeViewModel statusTypeViewModel)
         {
+            var statusType = this._mapper.Map<StatusTypeViewModel, StatusType>(statusTypeViewModel);
             _statusTypeRepository.Update(statusType);
         }
     }

@@ -1,11 +1,11 @@
 ﻿namespace InsurancePolicy.Application.Services
 {
-    using Application.Interfaces;
-    using Application.ViewModels;
+    using Interfaces;
+    using ViewModels;
     using Domain.Interfaces;
     using InsurancePolicy.Domain.Models;
 
-    public class InsurancePolicyService : IInsurancePolicyService
+    public class InsurancePolicyService : BaseData, IInsurancePolicyService
     {
         public IRepository<InsurancePolicy> _insurancePolicyRepository;
         public InsurancePolicyService(IRepository<InsurancePolicy> insurancePolicyRepository)
@@ -13,13 +13,15 @@
             _insurancePolicyRepository = insurancePolicyRepository;
         }
 
-        public void CreateInsurancePolicy(InsurancePolicy insurancePolicy)
+        public void CreateInsurancePolicy(InsurancePolicyViewModel insurancePolicyViewModel)
         {
+            var insurancePolicy = this._mapper.Map<InsurancePolicyViewModel, InsurancePolicy>(insurancePolicyViewModel);
             _insurancePolicyRepository.Create(insurancePolicy);
         }
 
-        public void DeleteInsurancePolicy(InsurancePolicy insurancePolicy)
+        public void DeleteInsurancePolicy(InsurancePolicyViewModel insurancePolicyViewModel)
         {
+            var insurancePolicy = this._mapper.Map<InsurancePolicyViewModel, InsurancePolicy>(insurancePolicyViewModel);
             _insurancePolicyRepository.Delete(insurancePolicy);
         }
 
@@ -31,8 +33,9 @@
             };
         }
 
-        public void UpdateInsurancePolicy(InsurancePolicy insurancePolicy)
+        public void UpdateInsurancePolicy(InsurancePolicyViewModel insurancePolicyViewModel)
         {
+            var insurancePolicy = this._mapper.Map<InsurancePolicyViewModel, InsurancePolicy>(insurancePolicyViewModel);
             _insurancePolicyRepository.Update(insurancePolicy);
         }
     }
