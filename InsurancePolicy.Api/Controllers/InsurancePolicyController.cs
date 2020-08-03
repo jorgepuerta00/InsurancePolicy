@@ -4,6 +4,7 @@
     using InsurancePolicy.Application.ViewModels;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
+    using System;
 
     [ApiController]
     [Route("api/[controller]")]
@@ -25,9 +26,9 @@
             {
                 return this.Ok(_insurancePolicyService.GetInsurancePolicies());
             }
-            catch
+            catch(Exception e)
             {
-                return this.BadRequest();
+                return this.BadRequest(e.Message);
             }
         }
 
@@ -39,9 +40,9 @@
                 _insurancePolicyService.CreateInsurancePolicy(InsurancePolicy);
                 return this.Ok();
             }
-            catch
+            catch (Exception e)
             {
-                return this.BadRequest();
+                return this.BadRequest(e.Message);
             }
         }
 
@@ -53,9 +54,9 @@
                 _insurancePolicyService.UpdateInsurancePolicy(InsurancePolicy);
                 return this.Ok();
             }
-            catch
+            catch (Exception e)
             {
-                return this.BadRequest();
+                return this.BadRequest(e.Message);
             }
         }
 
@@ -67,9 +68,9 @@
                 _insurancePolicyService.DeleteInsurancePolicy(InsurancePolicy);
                 return this.Ok();
             }
-            catch
+            catch (Exception e)
             {
-                return this.BadRequest();
+                return this.BadRequest(e.Message);
             }
         }
     }
