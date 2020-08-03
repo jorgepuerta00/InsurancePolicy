@@ -1,6 +1,6 @@
-﻿namespace InsurancePolicy.Domain.Model
+﻿namespace InsurancePolicy.Domain.Models
 {
-    public class CoverageType
+    public class CoverageType : BaseEntity
     {
         public int CoverageTypeID { get; set; }
         public string CoverageTypeCode { get; set; }

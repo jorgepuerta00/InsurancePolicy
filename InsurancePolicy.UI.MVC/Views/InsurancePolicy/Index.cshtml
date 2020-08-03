@@ -1,0 +1,287 @@
+﻿@model IEnumerable<InsurancePolicy.Application.ViewModels.InsurancePolicyViewModel>
+
+<table id="tblInsurancePolicy" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Poliza Id</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Tipo Cobertura</th>
+            <th>Cobertura %</th>
+            <th>Periodo de Cobertura (meses)</th>
+            <th>Fecha Inicio Vigencia</th>
+            <th>Precio</th>
+            <th>Tipo de Riesgo</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+        <tr style="height: 60px">
+            <td class="InsurancePolicyID">
+                <span>@obj.InsurancePolicyID</span>
+            </td>
+            <td class="Name">
+                <span>@obj.Name</span>
+                <input type="text" value="@obj.Name" style="display:none; width:100px" />
+            </td>
+            <td class="Description">
+                <span>@obj.Description</span>
+                <input type="text" value="@obj.Description" style="display:none; width:100px" />
+            </td>
+            <td class="CoverageTypeID">
+                <span>@obj.CoverageTypeID</span>
+                <input type="text" value="@obj.CoverageTypeID" style="display:none; width:100px" />
+            </td>
+            <td class="CoveragePercentage">
+                <span>@obj.CoveragePercentage</span>
+                <input type="text" value="@obj.CoveragePercentage" style="display:none; width:100px" />
+            </td>
+            <td class="CoverageTimeElapsed">
+                <span>@obj.CoverageTimeElapsed</span>
+                <input type="text" value="@obj.CoverageTimeElapsed" style="display:none; width:100px" />
+            </td>
+            <td class="Startdate">
+                <span>@obj.Startdate</span>
+                <input type="text" value="@obj.Startdate" style="display:none; width:100px" />
+            </td>
+            <td class="TotalCost">
+                <span>@obj.TotalCost</span>
+                <input type="text" value="@obj.TotalCost" style="display:none; width:100px" />
+            </td>
+            <td class="RiskTypeID">
+                <span>@obj.RiskTypeID</span>
+                <input type="text" value="@obj.RiskTypeID" style="display:none; width:100px" />
+            </td>
+            <td>
+                <a class="Edit" href="javascript:;">Editar</a>
+                <a class="Update" href="javascript:;" style="display:none">Actualizar</a>
+                <a class="Cancel" href="javascript:;" style="display:none">Cancelar</a>
+                <a class="Delete" href="javascript:;">Eliminar</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<table border="0" cellpadding="0" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Tipo Cobertura</th>
+            <th>Cobertura %</th>
+            <th>Periodo de Cobertura (meses)</th>
+            <th>Fecha Inicio Vigencia</th>
+            <th>Precio</th>
+            <th>Tipo de Riesgo</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tr style="height: 60px">
+        <td style="width: 150px">
+            <input type="text" id="txtName" style="width:100px" />
+        </td>
+        <td style="width: 150px">
+            <input type="text" id="txtDescription" style="width: 100px" />
+        </td>
+        <td style="width: 150px">
+            <input type="text" id="txtCoverageTypeID" style="width:100px" />
+        </td>
+        <td style="width: 150px">
+            <input type="text" id="txtCoveragePercentage" style="width:100px" />
+        </td>
+        <td style="width: 150px">
+            <input type="text" id="txtCoverageTimeElapsed" style="width:100px" />
+        </td>
+        <td style="width: 150px">
+            <input type="text" id="txtStartdate" style="width: 100px " />
+        </td>
+        <td style="width: 150px">
+            <input type="text" id="txtTotalCost" style="width:100px" />
+        </td>
+        <td style="width: 150px">
+            <input type="text" id="txtRiskTypeID" style="width:100px" />
+        </td>
+        <td style="width: 200px">
+            <br />
+            <input type="button" id="btnAdd" value="Add" />
+        </td>
+    </tr>
+</table>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+
+<script type="text/javascript">
+
+    $(function () {
+        if ($("#tblInsurancePolicy tr").length > 2) {
+            $("#tblInsurancePolicy tr:eq(1)").remove();
+        } else {
+            var row = $("#tblInsurancePolicy tr:last-child");
+            row.find(".Edit").hide();
+            row.find(".Delete").hide();
+            row.find("span").html('&nbsp;');
+        }
+    });
+
+    function AppendRow(row, name, description, coverageTypeID, coveragePercentage, coverageTimeElapsed, startdate, totalCost, riskTypeID) {
+
+        var id = row.find(".InsurancePolicyID").find("span").html()
+        $(".InsurancePolicyID", row).find("span").html(parseInt(id)+1);
+
+        $(".Name", row).find("span").html(name);
+        $(".Name", row).find("input").val(name);
+
+        $(".Description", row).find("span").html(description);
+        $(".Description", row).find("input").val(description);
+
+        $(".CoverageTypeID", row).find("span").html(coverageTypeID);
+        $(".CoverageTypeID", row).find("input").val(coverageTypeID);
+
+        $(".CoveragePercentage", row).find("span").html(coveragePercentage);
+        $(".CoveragePercentage", row).find("input").val(coveragePercentage);
+
+        $(".CoverageTimeElapsed", row).find("span").html(coverageTimeElapsed);
+        $(".CoverageTimeElapsed", row).find("input").val(coverageTimeElapsed);
+
+        $(".Startdate", row).find("span").html(startdate);
+        $(".Startdate", row).find("input").val(startdate);
+
+        $(".TotalCost", row).find("span").html(totalCost);
+        $(".TotalCost", row).find("input").val(totalCost);
+
+        $(".RiskTypeID", row).find("span").html(riskTypeID);
+        $(".RiskTypeID", row).find("input").val(riskTypeID);
+
+        row.find(".Edit").show();
+        row.find(".Delete").show();
+        $("#tblInsurancePolicy").append(row);
+    };
+
+
+    //Add event handler.
+    $("body").on("click", "#btnAdd", function () {
+        var txtName = $("#txtName");
+        var txtName = $("#txtName");
+        var txtDescription = $("#txtDescription");
+        var txtCoverageTypeID = $("#txtCoverageTypeID");
+        var txtCoveragePercentage = $("#txtCoveragePercentage");
+        var txtCoverageTimeElapsed = $("#txtCoverageTimeElapsed");
+        var txtStartdate = $("#txtStartdate");
+        var txtTotalCost = $("#txtTotalCost");
+        var txtRiskTypeID = $("#txtRiskTypeID");
+
+        var model = {
+            Name: txtName.val(),
+            Description: txtDescription.val(),
+            CoverageTypeID: txtCoverageTypeID.val(),
+            CoveragePercentage: txtCoveragePercentage.val(),
+            CoverageTimeElapsed: txtCoverageTimeElapsed.val(),
+            Startdate: txtStartdate.val(),
+            TotalCost: txtTotalCost.val(),
+            RiskTypeID: txtRiskTypeID.val()
+        };
+
+        var url = "@Url.Action("CreateInsurancePolicy", "InsurancePolicy")";
+
+        $.post(url, model, function (res) {
+            location.reload();
+        });
+        
+    });
+
+    //Edit event handler.
+    $("body").on("click", "#tblInsurancePolicy .Edit", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                $(this).find("input").show();
+                $(this).find("span").hide();
+            }
+        });
+        row.find(".Update").show();
+        row.find(".Cancel").show();
+        row.find(".Delete").hide();
+        $(this).hide();
+    });
+
+    //Update event handler.
+    $("body").on("click", "#tblInsurancePolicy .Update", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                var span = $(this).find("span");
+                var input = $(this).find("input");
+                span.html(input.val());
+                span.show();
+                input.hide();
+            }
+        });
+        row.find(".Edit").show();
+        row.find(".Delete").show();
+        row.find(".Cancel").hide();
+        $(this).hide();
+
+        var model = {
+            InsurancePolicyID: row.find(".InsurancePolicyID").find("span").html(),
+            Name: row.find(".Name").find("span").html(),
+            Description: row.find(".Description").find("span").html(),
+            CoverageTypeID: row.find(".CoverageTypeID").find("span").html(),
+            CoveragePercentage: row.find(".CoveragePercentage").find("span").html(),
+            CoverageTimeElapsed: row.find(".CoverageTimeElapsed").find("span").html(),
+            Startdate: row.find(".Startdate").find("span").html(),
+            TotalCost: row.find(".TotalCost").find("span").html(),
+            RiskTypeID: row.find(".RiskTypeID").find("span").html()
+        };
+
+        var url = "@Url.Action("UpdateInsurancePolicy", "InsurancePolicy")";
+
+        $.post(url, model, function (res) {
+            aler(res)
+        });
+    });
+
+    //Cancel event handler.
+    $("body").on("click", "#tblInsurancePolicy .Cancel", function () {
+        var row = $(this).closest("tr");
+        $("td", row).each(function () {
+            if ($(this).find("input").length > 0) {
+                var span = $(this).find("span");
+                var input = $(this).find("input");
+                input.val(span.html());
+                span.show();
+                input.hide();
+            }
+        });
+        row.find(".Edit").show();
+        row.find(".Delete").show();
+        row.find(".Update").hide();
+        $(this).hide();
+    });
+
+    //Delete event handler.
+    $("body").on("click", "#tblInsurancePolicy .Delete", function () {
+        if (confirm("Deseas eliminar este registro?")) {
+            var row = $(this).closest("tr");
+
+            var model = {
+                InsurancePolicyID: row.find(".InsurancePolicyID").find("span").html()
+            };
+
+            var url = "@Url.Action("DeleteInsurancePolicy", "InsurancePolicy")";
+
+            $.post(url, model, function (res) {
+                if ($("#tblInsurancePolicy tr").length > 2) {
+                    row.remove();
+                } else {
+                    row.find(".Edit").hide();
+                    row.find(".Delete").hide();
+                    row.find("span").html('&nbsp;');
+                }
+                aler(res)
+            });
+        }
+    });
+</script>
