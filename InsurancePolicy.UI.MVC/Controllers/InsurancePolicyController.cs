@@ -43,7 +43,7 @@
             }
             catch (Exception e)
             {
-                return this.BadRequest("ocurrió un error consultando los registros: " + e.Message);
+                return Json(new { status = "error", message = "ocurrió un error consultando los registros: " + e.Message });
             }
         }
 
@@ -52,12 +52,21 @@
         {
             try
             {
-                _insurancePolicyClient.ExecutePost(InsurancePolicy);
-                return this.Ok("Proceso exisoto: Registro creado");
+                var validate = _insurancePolicyClient.ExecutePost(InsurancePolicy, "/ValidateInsurancePolicy");
+
+                if (validate)
+                {
+                    _insurancePolicyClient.ExecutePost(InsurancePolicy);
+                    return Json(new { status = "success", message = "Registro creado." });
+                }
+                else
+                {
+                    return Json(new { status = "error", message = "El porcentaje de cobertura supera el porcentaje máximo del tipo de riesgo." });
+                }
             }
             catch (Exception e)
             {
-                return this.BadRequest("ocurrió un error creando el registro: " + e.Message);
+                return Json(new { status = "error", message = "ocurrió un error creando el registro: " + e.Message });
             }
         }
 
@@ -66,12 +75,21 @@
         {
             try
             {
-                _insurancePolicyClient.ExecutePut(InsurancePolicy);
-                return this.Ok("Proceso exisoto: Registro actualizado");
+                var validate = _insurancePolicyClient.ExecutePost(InsurancePolicy, "/ValidateInsurancePolicy");
+
+                if (validate)
+                {
+                    _insurancePolicyClient.ExecutePut(InsurancePolicy);
+                    return Json(new { status = "success", message = "Registro actualizado." });
+                }
+                else
+                {
+                    return Json(new { status = "error", message = "El porcentaje de cobertura supera el porcentaje máximo del tipo de riesgo." });
+                }
             }
             catch (Exception e)
             {
-                return this.BadRequest("ocurrió un error actualizando el registro: " + e.Message);
+                return Json(new { status = "error", message = "ocurrió un error actualizando el registro: " + e.Message });
             }
         }
 
@@ -81,11 +99,11 @@
             try
             {
                 _insurancePolicyClient.ExecuteDelete(InsurancePolicy);
-                return this.Ok("Proceso exisoto: Registro eliminado");
+                return Json(new { status = "success", message = "Registro eliminado." });
             }
             catch (Exception e)
             {
-                return this.BadRequest("ocurrió un error eliminando el registro: " + e.Message);
+                return Json(new { status = "error", message = "ocurrió un error eliminando el registro: " + e.Message });
             }
         }
     }

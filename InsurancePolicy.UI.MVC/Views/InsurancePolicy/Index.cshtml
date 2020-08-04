@@ -107,7 +107,7 @@
         </td>
         <td style="width: 200px">
             <br />
-            <input type="button" id="btnAdd" value="Add" />
+            <input type="button" id="btnAdd" value="Adicionar" />
         </td>
     </tr>
 </table>
@@ -206,7 +206,8 @@
         var url = "@Url.Action("CreateInsurancePolicy", "InsurancePolicy")";
 
         $.post(url, model, function (res) {
-            location.reload();
+            alert(res.message)
+            location.reload()
         });
 
     });
@@ -258,7 +259,8 @@
         var url = "@Url.Action("UpdateInsurancePolicy", "InsurancePolicy")";
 
         $.post(url, model, function (res) {
-            aler(res)
+            alert(res.message)
+            location.reload()
         });
     });
 
@@ -299,7 +301,7 @@
                     row.find(".Delete").hide();
                     row.find("span").html('&nbsp;');
                 }
-                aler(res)
+                alert(res.message)
             });
         }
     });

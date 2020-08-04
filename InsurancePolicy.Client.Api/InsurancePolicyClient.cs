@@ -31,6 +31,23 @@
 
             return (IEnumerable<T>)JsonConvert.DeserializeObject(response.Content, typeof(IEnumerable<T>));
         }
+        public bool ExecutePost(object request, string action)
+        {
+            RestClient restClient = new RestClient(Endpoint + action);
+            RestRequest restRequest = new RestRequest(Method.POST);
+
+            string json = JsonConvert.SerializeObject(request);
+            restRequest.AddParameter("application/json", json, ParameterType.RequestBody);
+
+            IRestResponse response = restClient.Execute(restRequest);
+
+            if (response.ErrorException != null)
+            {
+                throw response.ErrorException;
+            }
+
+            return (bool)JsonConvert.DeserializeObject(response.Content, typeof(bool));
+        }
         public void ExecutePost(object request)
         {
             RestClient restClient = new RestClient(Endpoint);

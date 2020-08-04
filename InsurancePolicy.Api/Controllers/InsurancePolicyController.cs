@@ -35,7 +35,7 @@
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("[action]")]
         public IActionResult ValidateInsurancePolicy([FromBody]InsurancePolicyViewModel InsurancePolicy)
         {
