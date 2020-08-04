@@ -4,14 +4,24 @@
     using Client.Api;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using System;
     using System.Collections.Generic;
 
     public class InsurancePolicyController : Controller
     {
-        private readonly InsurancePolicyClient _insurancePolicyClient;
-        public InsurancePolicyController(InsurancePolicyClient insurancePolicyClient)
+        private readonly InsurancePolicyClient<CoverageTypeViewModel> _coverageTypeClient;
+        private readonly InsurancePolicyClient<RiskTypeViewModel> _riskTypeClient;
+        private readonly InsurancePolicyClient<StatusTypeViewModel> _statusTypeClient;
+        private readonly InsurancePolicyClient<InsurancePolicyViewModel> _insurancePolicyClient;
+        public InsurancePolicyController(InsurancePolicyClient<CoverageTypeViewModel> coverageTypeClient, 
+                InsurancePolicyClient<RiskTypeViewModel> riskTypeClient,
+                InsurancePolicyClient<StatusTypeViewModel> statusTypeClient,
+                InsurancePolicyClient<InsurancePolicyViewModel> insurancePolicyClient)
         {
+            _coverageTypeClient = coverageTypeClient;
+            _riskTypeClient = riskTypeClient;
+            _statusTypeClient = statusTypeClient;
             _insurancePolicyClient = insurancePolicyClient;
         }
         
@@ -20,12 +30,20 @@
         {
             try
             {
-                var model = _insurancePolicyClient.ExecuteGet<IEnumerable<InsurancePolicyViewModel>>();
+                var coverageType = _coverageTypeClient.ExecuteGet();
+                var riskType = _riskTypeClient.ExecuteGet();
+                var statusType = _statusTypeClient.ExecuteGet();
+
+                ViewBag.CoverageType = new SelectList(coverageType, "CoverageTypeID", "CoverageTypeName");
+                ViewBag.RiskType = new SelectList(riskType, "RiskTypeID", "RiskTypeName");
+                ViewBag.StatusType = new SelectList(statusType, "StatusTypeID", "StatusTypeName");
+
+                var model = _insurancePolicyClient.ExecuteGet();
                 return View(model);
             }
             catch (Exception e)
             {
-                return this.BadRequest("ocurrió un error consultando los registros: " + e.Message);
+                return Json(new { status = "error", message = "ocurrió un error consultando los registros: " + e.Message });
             }
         }
 
@@ -34,12 +52,21 @@
         {
             try
             {
-                _insurancePolicyClient.ExecutePost<InsurancePolicyViewModel>(InsurancePolicy);
-                return this.Ok("Proceso exisoto: Registro creado");
+                var validate = _insurancePolicyClient.ExecutePost(InsurancePolicy, "/ValidateInsurancePolicy");
+
+                if (validate)
+                {
+                    _insurancePolicyClient.ExecutePost(InsurancePolicy);
+                    return Json(new { status = "success", message = "Registro creado." });
+                }
+                else
+                {
+                    return Json(new { status = "error", message = "El porcentaje de cobertura supera el porcentaje máximo del tipo de riesgo." });
+                }
             }
             catch (Exception e)
             {
-                return this.BadRequest("ocurrió un error creando el registro: " + e.Message);
+                return Json(new { status = "error", message = "ocurrió un error creando el registro: " + e.Message });
             }
         }
 
@@ -48,12 +75,21 @@
         {
             try
             {
-                _insurancePolicyClient.ExecutePut<InsurancePolicyViewModel>(InsurancePolicy);
-                return this.Ok("Proceso exisoto: Registro actualizado");
+                var validate = _insurancePolicyClient.ExecutePost(InsurancePolicy, "/ValidateInsurancePolicy");
+
+                if (validate)
+                {
+                    _insurancePolicyClient.ExecutePut(InsurancePolicy);
+                    return Json(new { status = "success", message = "Registro actualizado." });
+                }
+                else
+                {
+                    return Json(new { status = "error", message = "El porcentaje de cobertura supera el porcentaje máximo del tipo de riesgo." });
+                }
             }
             catch (Exception e)
             {
-                return this.BadRequest("ocurrió un error actualizando el registro: " + e.Message);
+                return Json(new { status = "error", message = "ocurrió un error actualizando el registro: " + e.Message });
             }
         }
 
@@ -62,12 +98,12 @@
         {
             try
             {
-                _insurancePolicyClient.ExecuteDelete<InsurancePolicyViewModel>(InsurancePolicy);
-                return this.Ok("Proceso exisoto: Registro eliminado");
+                _insurancePolicyClient.ExecuteDelete(InsurancePolicy);
+                return Json(new { status = "success", message = "Registro eliminado." });
             }
             catch (Exception e)
             {
-                return this.BadRequest("ocurrió un error eliminando el registro: " + e.Message);
+                return Json(new { status = "error", message = "ocurrió un error eliminando el registro: " + e.Message });
             }
         }
     }

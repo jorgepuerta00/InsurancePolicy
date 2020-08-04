@@ -9,5 +9,6 @@
         void UpdateInsurancePolicy(InsurancePolicyViewModel insurancePolicy);
         IEnumerable<InsurancePolicyViewModel> GetInsurancePolicies();
         void DeleteInsurancePolicy(InsurancePolicyViewModel insurancePolicy);
+        bool ValidateInsurancePolicy(InsurancePolicyViewModel insurancePolicy, RiskTypeViewModel riskTypeViewModel);
     }
 }
