@@ -36,5 +36,10 @@
             var insurancePolicy = this._mapper.Map<InsurancePolicyViewModel, InsurancePolicy>(insurancePolicyViewModel);
             _insurancePolicyRepository.Update(insurancePolicy);
         }
+
+        public bool ValidateInsurancePolicy(InsurancePolicyViewModel insurancePolicyViewModel, RiskTypeViewModel riskTypeViewModel)
+        {
+            return insurancePolicyViewModel.CoveragePercentage <= riskTypeViewModel.MaxCoverage;
+        }
     }
 }

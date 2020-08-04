@@ -9,7 +9,7 @@
     using System.Linq;
     using System.Reflection;
 
-    public class InsurancePolicyClient
+    public class InsurancePolicyClient<T>
     {
         public string Endpoint { get; set; }
 
@@ -18,7 +18,7 @@
             this.Endpoint = endpoint;
         }
 
-        public T ExecuteGet<T>()
+        public IEnumerable<T> ExecuteGet()
         {
             RestClient restClient = new RestClient(Endpoint);
             RestRequest restRequest = new RestRequest(Method.GET);
@@ -29,9 +29,26 @@
                 throw response.ErrorException;
             }
 
-            return (T)JsonConvert.DeserializeObject(response.Content, typeof(T));
+            return (IEnumerable<T>)JsonConvert.DeserializeObject(response.Content, typeof(IEnumerable<T>));
         }
-        public T ExecutePost<T>(Object request)
+        public bool ExecutePost(object request, string action)
+        {
+            RestClient restClient = new RestClient(Endpoint + action);
+            RestRequest restRequest = new RestRequest(Method.POST);
+
+            string json = JsonConvert.SerializeObject(request);
+            restRequest.AddParameter("application/json", json, ParameterType.RequestBody);
+
+            IRestResponse response = restClient.Execute(restRequest);
+
+            if (response.ErrorException != null)
+            {
+                throw response.ErrorException;
+            }
+
+            return (bool)JsonConvert.DeserializeObject(response.Content, typeof(bool));
+        }
+        public void ExecutePost(object request)
         {
             RestClient restClient = new RestClient(Endpoint);
             RestRequest restRequest = new RestRequest(Method.POST);
@@ -45,10 +62,8 @@
             {
                 throw response.ErrorException;
             }
-
-            return (T)JsonConvert.DeserializeObject(response.Content, typeof(T));
         }
-        public T ExecutePut<T>(Object request)
+        public void ExecutePut(object request)
         {
             RestClient restClient = new RestClient(Endpoint);
             RestRequest restRequest = new RestRequest(Method.PUT);
@@ -62,10 +77,8 @@
             {
                 throw response.ErrorException;
             }
-
-            return (T)JsonConvert.DeserializeObject(response.Content, typeof(T));
         }
-        public T ExecuteDelete<T>(Object request)
+        public void ExecuteDelete(object request)
         {
             RestClient restClient = new RestClient(Endpoint);
             RestRequest restRequest = new RestRequest(Method.DELETE);
@@ -76,8 +89,6 @@
             {
                 throw response.ErrorException;
             }
-
-            return (T)JsonConvert.DeserializeObject(response.Content, typeof(T));
         }
     }
     public class RootGetInsurancePolicyResponse

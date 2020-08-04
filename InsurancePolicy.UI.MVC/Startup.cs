@@ -10,6 +10,7 @@ namespace InsurancePolicy.UI.MVC
     using Microsoft.Extensions.Hosting;
     using AutoMapper;
     using InsurancePolicy.Client.Api;
+    using InsurancePolicy.Application.ViewModels;
 
     public class Startup
     {
@@ -32,8 +33,20 @@ namespace InsurancePolicy.UI.MVC
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddSingleton<InsurancePolicyClient>(Endpoint => new InsurancePolicyClient(
-                    Configuration.GetValue<string>("Endpoint:DefaultEndpoint")
+            services.AddSingleton(Endpoint => new InsurancePolicyClient<InsurancePolicyViewModel>(
+                    Configuration.GetValue<string>("Endpoint:InsurancePolicyEndpoint")
+                ));
+
+            services.AddSingleton(Endpoint => new InsurancePolicyClient<CoverageTypeViewModel>(
+                    Configuration.GetValue<string>("Endpoint:CoverageTypeEndpoint")
+                ));
+
+            services.AddSingleton(Endpoint => new InsurancePolicyClient<RiskTypeViewModel>(
+                    Configuration.GetValue<string>("Endpoint:RiskTypeEndpoint")
+                ));
+
+            services.AddSingleton(Endpoint => new InsurancePolicyClient<StatusTypeViewModel>(
+                    Configuration.GetValue<string>("Endpoint:StatusTypeEndpoint")
                 ));
         }
 
