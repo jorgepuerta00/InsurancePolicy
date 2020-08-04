@@ -40,8 +40,6 @@ namespace InsurancePolicy.UnitTest.Test
                 Description = "Prueba"
             };
 
-            dbSetMock.Setup(x => x.Create(insurancePolicy));
-
             // Act
             _repository.Create(insurancePolicy);
 
@@ -77,8 +75,6 @@ namespace InsurancePolicy.UnitTest.Test
                 Description = "Prueba"
             };
 
-            dbSetMock.Setup(x => x.Update(insurancePolicy));
-
             // Act
             _repository.Update(insurancePolicy);
 
@@ -95,8 +91,6 @@ namespace InsurancePolicy.UnitTest.Test
                 Name = "Prueba",
                 Description = "Prueba"
             };
-
-            dbSetMock.Setup(x => x.Delete(insurancePolicy));
 
             // Act
             _repository.Delete(insurancePolicy);
