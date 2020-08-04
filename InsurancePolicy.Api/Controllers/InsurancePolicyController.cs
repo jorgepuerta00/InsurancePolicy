@@ -5,18 +5,21 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using System;
+    using System.Linq;
 
     [ApiController]
     [Route("api/[controller]")]
     public class InsurancePolicyController : ControllerBase
     {
         private readonly IInsurancePolicyService _insurancePolicyService;
+        private readonly IRiskTypeService _riskTypeService;
         private readonly ILogger<InsurancePolicyController> _logger;
 
-        public InsurancePolicyController(ILogger<InsurancePolicyController> logger, IInsurancePolicyService insuranceService)
+        public InsurancePolicyController(ILogger<InsurancePolicyController> logger, IInsurancePolicyService insuranceService, IRiskTypeService riskTypeService)
         {
             _logger = logger;
             _insurancePolicyService = insuranceService;
+            _riskTypeService = riskTypeService;
         }
 
         [HttpGet]
@@ -27,6 +30,22 @@
                 return this.Ok(_insurancePolicyService.GetInsurancePolicies());
             }
             catch(Exception e)
+            {
+                return this.BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public IActionResult ValidateInsurancePolicy([FromBody]InsurancePolicyViewModel InsurancePolicy)
+        {
+            try
+            {
+                var riskType = _riskTypeService.GetRiskTypes().Where(r => r.RiskTypeID == InsurancePolicy.RiskTypeID).FirstOrDefault();
+
+                return this.Ok(_insurancePolicyService.ValidateInsurancePolicy(InsurancePolicy, riskType));
+            }
+            catch (Exception e)
             {
                 return this.BadRequest(e.Message);
             }
