@@ -8,23 +8,23 @@
 
     [ApiController]
     [Route("api/[controller]")]
-    public class InsurancePolicyController : ControllerBase
+    public class CoverageTypeController : ControllerBase
     {
-        private readonly IInsurancePolicyService _insurancePolicyService;
-        private readonly ILogger<InsurancePolicyController> _logger;
+        private readonly ICoverageTypeService _insurancePolicyService;
+        private readonly ILogger<CoverageTypeController> _logger;
 
-        public InsurancePolicyController(ILogger<InsurancePolicyController> logger, IInsurancePolicyService insuranceService)
+        public CoverageTypeController(ILogger<CoverageTypeController> logger, ICoverageTypeService insuranceService)
         {
             _logger = logger;
             _insurancePolicyService = insuranceService;
         }
 
         [HttpGet]
-        public IActionResult GetInsurancePolicies()
+        public IActionResult GetCoverageTypes()
         {
             try
             {
-                return this.Ok(_insurancePolicyService.GetInsurancePolicies());
+                return this.Ok(_insurancePolicyService.GetCoverageTypes());
             }
             catch(Exception e)
             {
@@ -33,11 +33,11 @@
         }
 
         [HttpPost]
-        public IActionResult CreateInsurancePolicy([FromBody]InsurancePolicyViewModel InsurancePolicy)
+        public IActionResult CreateCoverageType([FromBody]CoverageTypeViewModel CoverageType)
         {
             try
             {
-                _insurancePolicyService.CreateInsurancePolicy(InsurancePolicy);
+                _insurancePolicyService.CreateCoverageType(CoverageType);
                 return this.Ok();
             }
             catch (Exception e)
@@ -47,11 +47,11 @@
         }
 
         [HttpPut]
-        public IActionResult UpdateInsurancePolicy([FromBody]InsurancePolicyViewModel InsurancePolicy)
+        public IActionResult UpdateCoverageType([FromBody]CoverageTypeViewModel CoverageType)
         {
             try
             {
-                _insurancePolicyService.UpdateInsurancePolicy(InsurancePolicy);
+                _insurancePolicyService.UpdateCoverageType(CoverageType);
                 return this.Ok();
             }
             catch (Exception e)
@@ -61,11 +61,11 @@
         }
 
         [HttpDelete]
-        public IActionResult DeleteInsurancePolicy([FromBody]InsurancePolicyViewModel InsurancePolicy)
+        public IActionResult DeleteCoverageType([FromBody]CoverageTypeViewModel CoverageType)
         {
             try
             {
-                _insurancePolicyService.DeleteInsurancePolicy(InsurancePolicy);
+                _insurancePolicyService.DeleteCoverageType(CoverageType);
                 return this.Ok();
             }
             catch (Exception e)

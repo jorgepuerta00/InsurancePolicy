@@ -12,7 +12,6 @@
         public static void RegisterServices(IServiceCollection services)
         {
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
             services.AddScoped<ICoverageTypeService, CoverageTypeService>();
             services.AddScoped<IInsurancePolicyService, InsurancePolicyService>();
             services.AddScoped<IRiskTypeService, RiskTypeService>();
